@@ -27,10 +27,14 @@ services:
     build:
       context: ./mongodb
     container_name: my-mongodb
+    volumes:
+      - mongodb-data:/data/db
     ports:
       - "27017:27017"
     networks:
       - my-mosquitto
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   device_01:
     build:
@@ -39,8 +43,54 @@ services:
     networks:
       - my-mosquitto
     environment:
+    - SENSOR_ID=sensor_temperature_01
     - PYTHONUNBUFFERED=1
+
+  device_02:
+    build:
+      context: ./publishers/device_01
+    container_name: device_02
+    networks:
+      - my-mosquitto
+    environment:
+    - SENSOR_ID=sensor_temperature_02
+    - PYTHONUNBUFFERED=1
+
+  device_03:
+    build:
+      context: ./publishers/device_01
+    container_name: device_03
+    networks:
+      - my-mosquitto
+    environment:
+    - SENSOR_ID=sensor_humidity_01
+    - PYTHONUNBUFFERED=1
+
+  device_04:
+    build:
+      context: ./publishers/device_01
+    container_name: device_04
+    networks:
+      - my-mosquitto
+    environment:
+    - SENSOR_ID=sensor_humidity_02
+    - PYTHONUNBUFFERED=1
+
+  temperature_sub:
+    build:
+      context: ./subscribers/temperature
+    container_name: temperature_sub
+    networks:
+      - my-mosquitto
+    environment:
+    - PYTHONUNBUFFERED=1
+    depends_on:
+      - mosquitto
+      - mongodb
 
 networks:
   my-mosquitto:
     driver: bridge
+
+volumes:
+  mongodb-data:

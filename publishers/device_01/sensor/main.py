@@ -3,12 +3,18 @@ import json
 import time
 import random
 from datetime import datetime
+import os
+
+sensor_id = os.getenv("SENSOR_ID", default=None)
+
+if not sensor_id:
+    raise ValueError("Sensor Id must be present as environment variables")
+
 
 mqtt_broker_host = "my-mosquitto"  
 mqtt_port = 1883
 mqtt_topic = "temperature"
 
-sensor_id = "sensor123"
 
 def publish_temperature(client, value):
     timestamp = datetime.utcnow().isoformat()
