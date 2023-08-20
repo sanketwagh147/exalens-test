@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  redis:
+    build:
+      context: ./redis
+    container_name: my-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - my-mosquitto
+
+  mosquitto:
+    build:
+      context: ./mqtt_broker
+    container_name: my-mosquitto
+    volumes:
+      - ./mqtt_broker/config:/mosquitto/config
+      - ./mqtt_broker/data:/mosquitto/data
+      - ./mqtt_broker/log:/mosquitto/log
+    ports:
+      - "1883:1883"
+    networks:
+      - my-mosquitto
+
+  mongodb:
+    build:
+      context: ./mongodb
+    container_name: my-mongodb
+    ports:
+      - "27017:27017"
+    networks:
+      - my-mosquitto
+
+  device_01:
+    build:
+      context: ./publishers/device_01
+    container_name: device_01
+    networks:
+      - my-mosquitto
+    environment:
+    - PYTHONUNBUFFERED=1
+
+networks:
+  my-mosquitto:
+    driver: bridge
