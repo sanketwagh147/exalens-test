@@ -3,10 +3,12 @@ import json
 from pymongo import MongoClient
 from datetime import datetime
 import os
+import sys
 
 topics = os.getenv("SENSOR_TYPES", "")
 if not topics:
-    assert ValueError("SENSOR_TYPES MUST BE DEFINED IN ENVIRONMENT VARIABLE")
+    print("Sensor TYPES must be present as environment variables")
+    exit()
 
 mqtt_broker_host = "my-mosquitto"  
 mqtt_port = 1883

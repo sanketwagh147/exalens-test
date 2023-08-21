@@ -9,9 +9,11 @@ sensor_id = os.getenv("SENSOR_ID", default=None)
 sensor_type = os.getenv("SENSOR_TYPE", default=None)
 
 if not sensor_id:
-    raise ValueError("Sensor Id must be present as environment variables")
+    print("Sensor Id must be present as environment variables")
+    exit()
 if not sensor_type:
-    raise ValueError("Sensor Type must be present as environment variables")
+    print("Sensor Type must be present as environment variables")
+    exit()
 
 
 mqtt_broker_host = "my-mosquitto"  
