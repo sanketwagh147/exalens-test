@@ -66,9 +66,10 @@ async def home(request: Request):
             "readings": readings,
             "page": page,
             "total_pages": total_pages,
-            "sensor_type": "All sensor reading",
+            "sensor_type": "All sensor types",
             "sensor_types": SENSOR_TYPES,
-            "sensor_ids": distinct_sensor_ids
+            "sensor_ids": distinct_sensor_ids,
+            "current_page": page,
         },
     )
 
@@ -128,7 +129,7 @@ async def filter(
             "readings": readings,
             "page": page,
             "total_pages": total_pages,
-            "sensor_type": sensor_type or "All sensor reading",
+            "sensor_type": sensor_type or "All sensor types",
             "sensor_types": SENSOR_TYPES,
             "current_sensor_id": sensor_id,
         },

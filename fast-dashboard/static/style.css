@@ -1,0 +1,38 @@
+.pagination-container {
+    max-width: 100%;
+    margin: 0 auto; 
+}
+
+.pagination {
+    background-color: #333; 
+    color: #fff; 
+}
+
+.page-item .page-link {
+    color: #fff; 
+    background-color: #333; 
+    border-color: #555; 
+}
+
+.page-item.active .page-link {
+    background-color: #555; 
+    border-color: #777; 
+}
+
+.page-item.disabled .page-link {
+    background-color: #333; 
+    border-color: #555; 
+    color: #777; 
+}
+
+
+.charts{
+    background-color: #333; 
+    border-color: #555; 
+
+}
+.readings{
+    background-color: #333; 
+    border-color: #555; 
+
+}
