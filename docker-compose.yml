@@ -38,51 +38,56 @@ services:
 
   device_01:
     build:
-      context: ./publishers/device_01
+      context: ./publishers/sensor
     container_name: device_01
     networks:
       - my-mosquitto
     environment:
     - SENSOR_ID=sensor_temperature_01
+    - SENSOR_TYPE=temperature
     - PYTHONUNBUFFERED=1
 
   device_02:
     build:
-      context: ./publishers/device_01
+      context: ./publishers/sensor
     container_name: device_02
     networks:
       - my-mosquitto
     environment:
     - SENSOR_ID=sensor_temperature_02
+    - SENSOR_TYPE=temperature
     - PYTHONUNBUFFERED=1
 
   device_03:
     build:
-      context: ./publishers/device_01
+      context: ./publishers/sensor
     container_name: device_03
     networks:
       - my-mosquitto
     environment:
     - SENSOR_ID=sensor_humidity_01
+    - SENSOR_TYPE=humidity
     - PYTHONUNBUFFERED=1
 
   device_04:
     build:
-      context: ./publishers/device_01
+      context: ./publishers/sensor
     container_name: device_04
     networks:
       - my-mosquitto
     environment:
+    - SENSOR_TYPE=humidity
     - SENSOR_ID=sensor_humidity_02
     - PYTHONUNBUFFERED=1
 
-  temperature_sub:
+  subscriber:
     build:
-      context: ./subscribers/temperature
-    container_name: temperature_sub
+      context: ./subscribers
+    container_name: subscriber
     networks:
       - my-mosquitto
     environment:
+    - SENSOR_TYPES=humidity,temperature
     - PYTHONUNBUFFERED=1
     depends_on:
       - mosquitto

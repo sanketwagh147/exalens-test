@@ -1,8 +1,9 @@
 FROM python:3.8-slim
 
-WORKDIR /temperature_sub
+WORKDIR /
 
-COPY temperature_sub /temperature_sub/
+COPY main.py /main.py
+COPY requirements.txt /requirements.txt
 
 RUN pip install -r requirements.txt
 

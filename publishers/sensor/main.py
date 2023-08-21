@@ -6,14 +6,17 @@ from datetime import datetime
 import os
 
 sensor_id = os.getenv("SENSOR_ID", default=None)
+sensor_type = os.getenv("SENSOR_TYPE", default=None)
 
 if not sensor_id:
     raise ValueError("Sensor Id must be present as environment variables")
+if not sensor_type:
+    raise ValueError("Sensor Type must be present as environment variables")
 
 
 mqtt_broker_host = "my-mosquitto"  
 mqtt_port = 1883
-mqtt_topic = "temperature"
+mqtt_topic = sensor_type
 
 
 def publish_temperature(client, value):
