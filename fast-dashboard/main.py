@@ -52,6 +52,7 @@ async def home(request: Request):
         .limit(readings_per_page)
         .to_list(None)
     )
+    distinct_sensor_ids = await collection.distinct("sensor_id")
 
     readings = [
         {**each, "timestamp": await format_timestamp(each["timestamp"])}
@@ -67,6 +68,7 @@ async def home(request: Request):
             "total_pages": total_pages,
             "sensor_type": "All sensor reading",
             "sensor_types": SENSOR_TYPES,
+            "sensor_ids": distinct_sensor_ids
         },
     )
 
