@@ -108,7 +108,7 @@ async def filter(
     total_readings = await collection.count_documents(query)
     print(total_readings, "total reading")
     total_pages = int(total_readings / readings_per_page)
-    skip_count = (page - 1) * readings_per_page
+    skip_count = (int(page) - 1) * readings_per_page
     temperature_readings = (
         await collection.find(query)
         .sort("_id", -1)
@@ -123,11 +123,12 @@ async def filter(
     ]
 
     return templates.TemplateResponse(
-        "index.html",
+        "content.html",
         {
             "request": request,
             "readings": readings,
             "page": page,
+            "current_page": page,
             "total_pages": total_pages,
             "sensor_type": sensor_type or "All sensor types",
             "sensor_types": SENSOR_TYPES,

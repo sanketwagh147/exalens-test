@@ -65,8 +65,33 @@ function getAllQueryParams() {
 	return queryParams;
 }
 
-function fetchLatest(page = "") {
-	const selectSensor = document.getElementById("sensorType").value;
-	const selectID = document.getElementById("sensorID").value;
-	console.log(selectSensor, startISO, endISO, selectID, page);
+async function fetchLatest(page = 1) {
+	const sensorType = document.getElementById("sensorType").value;
+	const sensorId = document.getElementById("sensorID").value;
+	console.log(sensorType, startISO, endISO, sensorId, page);
+
+	const queryParams = new URLSearchParams({
+		sensor_id: sensorId,
+		sensor_type: sensorType,
+		start_date: startISO,
+		end_date: endISO,
+		page: page,
+	});
+
+	const url = `/filter?${queryParams}`;
+
+	try {
+		const response = await fetch(url);
+
+		if (!response.ok) {
+			throw new Error(`HTTP error! Status: ${response.status}`);
+		}
+
+		const htmlContent = await response.text();
+
+		const resultContainer = document.getElementById("content");
+		resultContainer.innerHTML = htmlContent;
+	} catch (error) {
+		console.error("Error fetching data:", error);
+	}
 }
