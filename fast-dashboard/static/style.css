@@ -38,9 +38,12 @@
 }
 
 .humidity {
-    background-color: #33CCCC !important;
 }
 .temperature {
-    background-color:#ff820e !important;
+
+}
+
+.border-primary, .page-link{
+    border-color:#ff820e !important;
 
 }
