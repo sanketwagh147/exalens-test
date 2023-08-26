@@ -65,6 +65,14 @@ function getAllQueryParams() {
 	return queryParams;
 }
 
+function titleCase(str) {
+	str = str.toLowerCase().split(" ");
+	for (var i = 0; i < str.length; i++) {
+		str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+	}
+	return str.join(" ");
+}
+
 async function fetchLatest(page = 1) {
 	const sensorType = document.getElementById("sensorType").value;
 	const sensorId = document.getElementById("sensorID").value;
@@ -88,6 +96,14 @@ async function fetchLatest(page = 1) {
 		}
 
 		const htmlContent = await response.text();
+
+		if (sensorType) {
+			document.getElementById("currentSensorType").textContent =
+				titleCase(sensorType);
+		} else {
+			document.getElementById("currentSensorType").textContent =
+				titleCase("all sensors types");
+		}
 
 		const resultContainer = document.getElementById("content");
 		resultContainer.innerHTML = htmlContent;

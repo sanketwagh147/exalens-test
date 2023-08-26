@@ -17,13 +17,13 @@
 </head>
 <body>
         <header class="bg-dark text-white py-3 d-flex justify-content-around">
-            <div class="text-center"><h1>{{sensor_type|title}}</h1></div>
+            <div class="text-center"><h1 id="currentSensorType">{{sensor_type|title}}</h1></div>
             <div id="reportrange" class="btn bg-dark text-light border-primary rounded" >
                 <i class="fa fa-calendar"></i>&nbsp;
                 <span></span> <i class="fa fa-caret-down"></i>
             </div>
             <select class="bg-dark text-light border-primary rounded" id="sensorType" aria-label="Default select example" onChange=fetchLatest()>
-                <option selected value="">All sensor types</option>
+                <option selected value="" >All sensor types</option>
                 {% for value in sensor_types %}
                     <option value="{{value}}">{{value|title}}</option>
                 {% endfor %}
