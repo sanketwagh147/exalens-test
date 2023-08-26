@@ -1,9 +1,12 @@
 <mxfile host="65bd71144e">
     <diagram id="XEpFlv33g4mPtH0KcbgP" name="Page-1">
-        <mxGraphModel dx="972" dy="819" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="914" dy="819" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
+                <mxCell id="67" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="6" y="260" width="844" height="570" as="geometry"/>
+                </mxCell>
                 <mxCell id="3" value="MQTT BROKER" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
                     <mxGeometry x="350" y="310" width="120" height="480" as="geometry"/>
                 </mxCell>
