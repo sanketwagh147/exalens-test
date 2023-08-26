@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 
 services:
   redis:
@@ -92,6 +92,18 @@ services:
     depends_on:
       - mosquitto
       - mongodb
+
+  dashboard:
+    build:
+      context: ./fast-dashboard
+    container_name: dashboard
+    networks:
+      - my-mosquitto
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+      - redis
 
 networks:
   my-mosquitto:

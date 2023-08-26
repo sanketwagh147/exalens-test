@@ -1,16 +1,21 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Depends
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+import redis
 import pytz
 from motor.motor_asyncio import AsyncIOMotorClient
 from datetime import datetime
 
-app = FastAPI()
 
-mongo_uri = "mongodb://localhost:27017/"
+
+mongo_uri = "mongodb://mongodb:27017/"
 client = AsyncIOMotorClient(mongo_uri)
 db = client["sensor_data"]
 collection = db["readings"]
+
+redis = redis.Redis("redis://redis:6379")
+
+
 
 templates = Jinja2Templates(directory="templates")
 
@@ -18,15 +23,16 @@ templates = Jinja2Templates(directory="templates")
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-SENSOR_TYPES = {"temperature": "Temperature", "humidity": "Humidity", "": "All"}
 
-mongo_uri = "mongodb://localhost:27017/"
+
 client = AsyncIOMotorClient(mongo_uri)
 db = client["sensor_data"]
 collection = db["readings"]
 
 templates = Jinja2Templates(directory="templates")
 
+async def get_sensor_types():
+    return await collection.distinct("sensor_type")
 
 async def format_timestamp(timestamp):
     utc_time = timestamp.replace(tzinfo=pytz.UTC)
@@ -67,7 +73,7 @@ async def home(request: Request):
             "page": page,
             "total_pages": total_pages,
             "sensor_type": "All sensor types",
-            "sensor_types": SENSOR_TYPES,
+            "sensor_types": await get_sensor_types(),
             "sensor_ids": distinct_sensor_ids,
             "current_page": page,
         },
@@ -131,7 +137,7 @@ async def filter(
             "current_page": page,
             "total_pages": total_pages,
             "sensor_type": sensor_type or "All sensor types",
-            "sensor_types": SENSOR_TYPES,
+            "sensor_types": await get_sensor_types(),
             "current_sensor_id": sensor_id,
         },
     )

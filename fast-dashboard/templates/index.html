@@ -23,13 +23,13 @@
                 <span></span> <i class="fa fa-caret-down"></i>
             </div>
             <select class="bg-dark text-light border-primary rounded" id="sensorType" aria-label="Default select example" onChange=fetchLatest()>
-                <option selected disabled value="">{{sensor_type|title}}</option>
-                {% for value, content in sensor_types.items() %}
-                    <option value="{{value}}">{{content}}</option>
+                <option selected value="">All sensor types</option>
+                {% for value in sensor_types %}
+                    <option value="{{value}}">{{value|title}}</option>
                 {% endfor %}
             </select>
             <select class="bg-dark text-light border-primary rounded" id="sensorID" aria-label="Default select example" onChange=fetchLatest()>
-                <option selected disabled value="">{{sensor_id or "Sensor Id"}}</option>
+                <option selected value="">All sensor ids</option>
                 {% for value in sensor_ids %}
                     <option value="{{value}}">{{value}}</option>
                 {% endfor %}
