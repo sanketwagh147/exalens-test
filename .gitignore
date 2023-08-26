@@ -4,3 +4,4 @@ venv/**
 *.db
 .vscode/**
 temp.ipynb
+architechture/task.txt

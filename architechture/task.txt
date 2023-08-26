@@ -22,7 +22,7 @@ In-Memory Data Management: Implement Redis using Docker to store the latest ten 
 
 ✅An endpoint that allows users to fetch sensor readings by specifying a start and end range.
 
-An endpoint to retrieve the last ten sensor readings for a specific sensor.
+✅An endpoint to retrieve the last ten sensor readings for a specific sensor.
 
 Docker Integration: Integrate all services using Docker Compose.
 
