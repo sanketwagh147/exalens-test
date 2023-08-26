@@ -1,17 +1,19 @@
 let startISO, endISO;
-$(function () {
+$(function (start, end, last) {
 	var start = moment().subtract(29, "days");
 	var end = moment();
 
-	function cb(start, end) {
+	function cb(start, end, last = "") {
 		startISO = start.toISOString();
 		endISO = end.toISOString();
+		console.log("Lastt val", last);
+
 		$("#reportrange span").html(
 			start.format("MMMM D, YYYY hh:mm A") +
 				" - " +
 				end.format("MMMM D, YYYY hh:mm A")
 		);
-		fetchLatest();
+		fetchLatest((page = 1), (last = last));
 	}
 
 	$("#reportrange").daterangepicker(
@@ -41,7 +43,7 @@ $(function () {
 		cb
 	);
 
-	cb(start, end);
+	cb(start, end, last);
 });
 function fetchNew(new_start_date, new_end_date) {
 	const queryParams = new URLSearchParams(window.location.search);
@@ -73,7 +75,7 @@ function titleCase(str) {
 	return str.join(" ");
 }
 
-async function fetchLatest(page = 1) {
+async function fetchLatest(page = 1, last = "") {
 	const sensorType = document.getElementById("sensorType").value;
 	const sensorId = document.getElementById("sensorID").value;
 	console.log(sensorType, startISO, endISO, sensorId, page);
@@ -84,6 +86,7 @@ async function fetchLatest(page = 1) {
 		start_date: startISO,
 		end_date: endISO,
 		page: page,
+		last: last,
 	});
 
 	const url = `/filter?${queryParams}`;

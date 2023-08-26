@@ -7,12 +7,21 @@ import os
 
 sensor_id = os.getenv("SENSOR_ID", default=None)
 sensor_type = os.getenv("SENSOR_TYPE", default=None)
+frequency = os.getenv("FREQUENCY", default=None)
+range_ = os.getenv("RANGE",default=None)
+if not range_:
+    print("Sensor range must be present in the env vars")
+    exit()
+
 
 if not sensor_id:
     print("Sensor Id must be present as environment variables")
     exit()
 if not sensor_type:
     print("Sensor Type must be present as environment variables")
+    exit()
+if not frequency:
+    print("Frequency must be present as environment variables for the publisher device")
     exit()
 
 
@@ -44,10 +53,10 @@ client.loop_start()
 
 try:
     while True:
-        temperature_reading = random.randint(10, 40)
+        temperature_reading = random.randint(*[int(i) for i in range_.split(",")])
 
         publish_temperature(client, temperature_reading)
-        time.sleep(5)  
+        time.sleep(int(frequency))  
 except KeyboardInterrupt:
     print("Exit")
     client.loop_stop()

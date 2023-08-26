@@ -45,6 +45,8 @@ services:
     environment:
     - SENSOR_ID=sensor_temperature_01
     - SENSOR_TYPE=temperature
+    - RANGE=-25,50
+    - FREQUENCY=60
     - PYTHONUNBUFFERED=1
 
   device_02:
@@ -55,7 +57,9 @@ services:
       - my-mosquitto
     environment:
     - SENSOR_ID=sensor_temperature_02
+    - RANGE=-25,50
     - SENSOR_TYPE=temperature
+    - FREQUENCY=60
     - PYTHONUNBUFFERED=1
 
   device_03:
@@ -65,6 +69,8 @@ services:
     networks:
       - my-mosquitto
     environment:
+    - FREQUENCY=120
+    - RANGE=0,100
     - SENSOR_ID=sensor_humidity_01
     - SENSOR_TYPE=humidity
     - PYTHONUNBUFFERED=1
@@ -76,6 +82,8 @@ services:
     networks:
       - my-mosquitto
     environment:
+    - FREQUENCY=120
+    - RANGE=0,100
     - SENSOR_TYPE=humidity
     - SENSOR_ID=sensor_humidity_02
     - PYTHONUNBUFFERED=1

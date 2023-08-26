@@ -48,6 +48,10 @@
                 <td class="fs-5">{{ reading.timestamp }}</td>
                 <td class="fs-5">{{ reading.value }}</td>
             </tr>
+            {% else %}{
+                <tr><td class="fs-1">No Data found</td></tr>
+
+            }
             {% endfor %}
         </tbody>
     </table>

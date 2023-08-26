@@ -2,3 +2,5 @@
 venv/**
 
 *.db
+.vscode/**
+temp.ipynb
