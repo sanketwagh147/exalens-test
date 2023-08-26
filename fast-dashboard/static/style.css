@@ -36,3 +36,11 @@
     border-color: #555; 
 
 }
+
+.humidity {
+    background-color: #33CCCC !important;
+}
+.temperature {
+    background-color:#ff820e !important;
+
+}
