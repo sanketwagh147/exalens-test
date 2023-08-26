@@ -32,21 +32,22 @@
         
         
         <div class="container mt-4">
-    <table class="table table-dark table-hover">
+    <table class="table table-dark table-hover border-primary">
         <thead>
             <tr>
                 <th>Sensor ID</th>
+                <th>Sensor Type</th>
                 <th>Timestamp</th>
                 <th>Value</th>
             </tr>
         </thead>
         <tbody>
             {% for reading in readings %}
-            <tr>
-                <td class="fs-5">{{ reading.sensor_id }}</td>
-                
+            <tr >
+                <td class="fs-5">{{ reading.sensor_id }}  </td>
+                <td class="fs-5">{{'🌡️' if reading.sensor_type == 'temperature' else '💧'}}</td>
                 <td class="fs-5">{{ reading.timestamp }}</td>
-                <td class="fs-5">{{ reading.value }}</td>
+                <td class="fs-5 {{'temperature' if reading.sensor_type == 'temperature' else 'humidity'}}">{{ reading.value }} {{"(°C)" if reading.sensor_type == "temperature" else "%"}}</td>
             </tr>
             {% else %}{
                 <tr><td class="fs-1">No Data found</td></tr>
@@ -58,7 +59,5 @@
 </div>
 
 </div>
-<div class="col charts">
-    test
-    </div>
+
 </div>

@@ -36,3 +36,14 @@
     border-color: #555; 
 
 }
+
+.humidity {
+}
+.temperature {
+
+}
+
+.border-primary, .page-link{
+    border-color:#ff820e !important;
+
+}
