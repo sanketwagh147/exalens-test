@@ -14,10 +14,6 @@
 ### Or checkout live-demo of dashboard <Strong>[Here](https://www.sanketwagh.com/exalens-demo)</Strong>
 
 
-### Add Devices
-
-- To add more publishers(sensors) copy any device block in `docker-compose` and tweak environment variables as required which will spin up another container and start publishing to the broker
-
 # Adding More Publishers (Sensors)
 
 To add more publishers (sensors), you can copy any device block in the `docker-compose.yml` file and tweak the environment variables as required. This will spin up another container and start publishing to the broker.
