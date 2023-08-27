@@ -18,5 +18,5 @@ def heath():
     return "Health check ok"
 
 
-app.include_router(home_route.router)
-app.include_router(filter_route.router)
+app.include_router(home_route.router, prefix="/exalens-demo")
+app.include_router(filter_route.router, prefix="/exalens-demo")
