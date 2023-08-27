@@ -89,7 +89,7 @@ async function fetchLatest(page = 1, last = "") {
 		last: last,
 	});
 
-	const url = `/filter?${queryParams}`;
+	const url = `/exalens-demo/filter?${queryParams}`;
 
 	try {
 		const response = await fetch(url);
