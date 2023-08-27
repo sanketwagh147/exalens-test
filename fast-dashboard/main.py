@@ -98,7 +98,7 @@ async def home(request: Request):
     )
 
 
-@app.get("exalens-demo/filter")
+@app.get("/exalens-demo/filter")
 async def filter(
     request: Request,
     sensor_id: str = "",
