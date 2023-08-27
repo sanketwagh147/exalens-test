@@ -1,4 +1,9 @@
 let startISO, endISO;
+
+
+/*
+function responsible for daterangepicker
+*/
 $(function (start, end, last) {
 	var start = moment().subtract(29, "days");
 	var end = moment();
@@ -45,27 +50,8 @@ $(function (start, end, last) {
 
 	cb(start, end, last);
 });
-function fetchNew(new_start_date, new_end_date) {
-	const queryParams = new URLSearchParams(window.location.search);
 
-	queryParams.set("start_date", new_start_date);
-	queryParams.set("end_date", new_end_date);
 
-	const newUrl = `${window.location.pathname}?${queryParams.toString()}`;
-}
-
-function getAllQueryParams() {
-	var queryParams = {};
-	var queryString = window.location.search.substring(1);
-	var queryParamsArray = queryString.split("&");
-
-	for (var i = 0; i < queryParamsArray.length; i++) {
-		var param = queryParamsArray[i].split("=");
-		queryParams[param[0]] = decodeURIComponent(param[1]);
-	}
-
-	return queryParams;
-}
 
 function titleCase(str) {
 	str = str.toLowerCase().split(" ");
@@ -75,6 +61,13 @@ function titleCase(str) {
 	return str.join(" ");
 }
 
+/**
+ * The function fetchLatest is an asynchronous function that fetches data from a server based on user
+ * input and updates the HTML content of a content element with the fetched data.
+ * @param [page=1] - The page parameter is used to specify the page number of the data to fetch. It is
+ * an optional parameter with a default value of 1.
+ * @param [last] - The "last"  parameter is used for redis caching 
+ */
 async function fetchLatest(page = 1, last = "") {
 	const sensorType = document.getElementById("sensorType").value;
 	const sensorId = document.getElementById("sensorID").value;
