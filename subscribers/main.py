@@ -3,16 +3,19 @@ import json
 from pymongo import MongoClient
 from datetime import datetime
 import os
-import sys
 
+#Get configured topics form docker-compose 
 topics = os.getenv("SENSOR_TYPES", "")
 if not topics:
     print("Sensor TYPES must be present as environment variables")
     exit()
 
+
+#mqtt broker settings
 mqtt_broker_host = "my-mosquitto"  
 mqtt_port = 1883
 
+#mongod settings
 mongodb_host = "my-mongodb"  
 mongodb_port = 27017
 mongodb_db = "sensor_data"
@@ -32,11 +35,12 @@ def store_in_mongodb(data, sensor_type):
     collection.insert_one(data)
     print("Stored data in MongoDB:", data)
 
+# connect to mqtt
 client = mqtt.Client()
 client.on_message = on_message
-
 client.connect(mqtt_broker_host, mqtt_port, 60)
 
+#subscribe to each topic
 for each in topics.split(","):
     client.subscribe(each)
 
