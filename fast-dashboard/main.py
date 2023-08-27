@@ -59,7 +59,7 @@ async def format_timestamp(timestamp):
     return formatted_time
 
 
-@app.get("/")
+@app.get("/exalens-demo/")
 async def home(request: Request):
     readings_per_page = 50
     query = {}
@@ -98,7 +98,7 @@ async def home(request: Request):
     )
 
 
-@app.get("/filter")
+@app.get("exalens-demo/filter")
 async def filter(
     request: Request,
     sensor_id: str = "",
